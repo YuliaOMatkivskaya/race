@@ -1,7 +1,17 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-//здесь создаем переменные(игрок, другие машины, монетки, жизни, очки)
+//здесь создаем переменные(разметка, игрок, другие машины, монетки, жизни, очки)
+
+let lineOne = new Image();
+lineOne.src = "line.png";
+lineOne.X = 275;
+lineOne.Y = -150;
+
+let lineTwo = new Image();
+lineTwo.src = "line.png";
+lineTwo.X = 275;
+lineTwo.Y = 300;
 
 /*здесь создаем функции 
 
@@ -20,11 +30,16 @@ function drawRoad() {
     ctx.fillRect(0, 0, 600, 550);
 }
 
+function drawRoadMarkings(){
+    ctx.drawImage(lineOne,lineOne.X,lineOne.Y);
+    ctx.drawImage(lineTwo,lineTwo.X,lineTwo.Y);
+}
 
 //здесь создание основной функции game, в нее передаем все созданные функции, здесь происходит отрисовка игры
 function game(){
     
-    drawRoad()
+    drawRoad();
+    drawRoadMarkings();
 
 
     GAME = requestAnimationFrame(game);
