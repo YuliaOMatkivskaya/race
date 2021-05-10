@@ -5,13 +5,13 @@ const ctx = canvas.getContext("2d");
 
 let lineOne = new Image();
 lineOne.src = "line.png";
-lineOne.X = 275;
+lineOne.X = 285;
 lineOne.Y = -150;
 
 let lineTwo = new Image();
 lineTwo.src = "line.png";
-lineTwo.X = 275;
-lineTwo.Y = 300;
+lineTwo.X = 285;
+lineTwo.Y = 210;
 
 /*здесь создаем функции 
 
@@ -31,8 +31,18 @@ function drawRoad() {
 }
 
 function drawRoadMarkings(){
+    
     ctx.drawImage(lineOne,lineOne.X,lineOne.Y);
+    lineOne.Y += 5;
+    if (lineOne.Y > 550){
+        lineOne.Y = -150;
+    }
+
     ctx.drawImage(lineTwo,lineTwo.X,lineTwo.Y);
+    lineTwo.Y += 5;
+    if (lineTwo.Y > 550){
+        lineTwo.Y = -150;
+    }
 }
 
 //здесь создание основной функции game, в нее передаем все созданные функции, здесь происходит отрисовка игры
