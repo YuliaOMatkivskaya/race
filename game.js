@@ -15,12 +15,16 @@ const ctx = canvas.getContext("2d");
 отсчет очков
 */
 
-
+function drawRoad() {
+    ctx.fillStyle = "#333";
+    ctx.fillRect(0, 0, 600, 550);
+}
 
 
 //здесь создание основной функции game, в нее передаем все созданные функции, здесь происходит отрисовка игры
 function game(){
-
+    
+    drawRoad()
 
 
     GAME = requestAnimationFrame(game);
