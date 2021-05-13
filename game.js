@@ -23,8 +23,13 @@ enemyOne.src = "taxi.png";
 enemyOne.X = Math.floor(Math.random()*520);
 enemyOne.Y = -150;
 
+let bonusOne = new Image();
+bonusOne.src = "bonusOne.png";
+bonusOne.X = Math.floor(Math.random()*520);
+bonusOne.Y = -80;
+
 let lives = 3;
-let bonus = 0;
+let bonuses = 0;
 let left;
 let right;
 
@@ -86,9 +91,25 @@ function drawEnemyOne(){
 function drawLives() {
     ctx.font ="20px Arial";
     ctx.fillStyle = "#FFCC00";
-    ctx.fillText("Осталось жизней: " + lives, 400, 50);
+    ctx.fillText("Осталось жизней: " + lives, 30, 30);
 }
 
+function drawTextBonuses() {
+    ctx.font ="20px Arial";
+    ctx.fillStyle = "#FFCC00";
+    ctx.fillText("Бонусы: " + bonuses, 470, 30);
+}
+
+function drawBonus(){
+    if(bonusOne.Y +80 > gamer.Y && bonusOne.X +80 > gamer.X &&  bonusOne.X < gamer.X+80){
+        bonuses++
+        bonusOne.Y = -80;
+        bonusOne.X = Math.floor(Math.random()*520);
+    } else {
+        ctx.drawImage(bonusOne,bonusOne.X,bonusOne.Y);
+        bonusOne.Y += 8;
+    }
+}
 
 function gameOver() {
     if (lives < 1){
@@ -126,9 +147,11 @@ function game(){
     
     drawRoad();
     drawRoadMarkings();
+    drawBonus();
     drawGamer();
     drawEnemyOne();
     drawLives();
+    drawTextBonuses();
 
     GAME = requestAnimationFrame(game);
     gameOver();
