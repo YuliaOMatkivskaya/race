@@ -13,6 +13,11 @@ lineTwo.src = "line.png";
 lineTwo.X = 285;
 lineTwo.Y = 210;
 
+let gamer = new Image();
+gamer.src = "taxi.png";
+gamer.X = 200;
+gamer.Y = 390;
+
 let lives = 3;
 let bonus = 0;
 
@@ -48,6 +53,11 @@ function drawRoadMarkings(){
     }
 }
 
+function drawGamer(){
+    ctx.drawImage(gamer,gamer.X,gamer.Y);
+}
+
+
 function gameOver() {
     if (lives === 0){
     cancelAnimationFrame(GAME);
@@ -61,6 +71,7 @@ function game(){
     
     drawRoad();
     drawRoadMarkings();
+    drawGamer();
 
 
     GAME = requestAnimationFrame(game);
