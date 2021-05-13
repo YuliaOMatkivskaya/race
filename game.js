@@ -71,21 +71,27 @@ function drawEnemyOne(){
     enemyOne.Y += 5;
     if (enemyOne.Y > 550){
         enemyOne.Y = -150;
+        enemyOne.X = Math.floor(Math.random()*520);
     }
 }
+function drawLives() {
+    ctx.font ="20px Arial";
+    ctx.fillStyle = "#FFCC00";
+    ctx.fillText("Осталось жизней: " + lives, 400, 50);
+}
 
-
+// function crash(){}
 
 function gameOver() {
     if (lives === 0){
     cancelAnimationFrame(GAME);
     ctx.font ="50px Arial";
     ctx.fillStyle = "#660000";
-    ctx.fillText = "GAME OVER";
+    ctx.fillText("GAME OVER", 150, 250);
     }
 }
 
-//здесь обработчики событий вправо-влево
+//здесь обработчик событий вправо-влево : нажатия и отпускания кнопок вправо-влево
 
 addEventListener ("keydown", function(event){
     let key = event.keyCode;
@@ -114,6 +120,7 @@ function game(){
     drawRoadMarkings();
     drawGamer();
     drawEnemyOne();
+    drawLives();
 
 
     GAME = requestAnimationFrame(game);
