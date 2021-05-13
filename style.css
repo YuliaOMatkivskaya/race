@@ -1,4 +1,7 @@
-canvas {
+#ground{
+    background-color: #093b09;
+}
+#game {
     display: block;
     margin: 0 auto;
 }
