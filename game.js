@@ -5,12 +5,12 @@ const ctx = canvas.getContext("2d");
 
 let lineOne = new Image();
 lineOne.src = "line.png";
-lineOne.X = 285;
+lineOne.X = 295;
 lineOne.Y = -150;
 
 let lineTwo = new Image();
 lineTwo.src = "line.png";
-lineTwo.X = 285;
+lineTwo.X = 295;
 lineTwo.Y = 210;
 
 let gamer = new Image();
@@ -18,8 +18,15 @@ gamer.src = "taxi.png";
 gamer.X = 200;
 gamer.Y = 390;
 
+let enemyOne = new Image();
+enemyOne.src = "taxi.png";
+enemyOne.X = Math.floor(Math.random()*520);
+enemyOne.Y = -150;
+
 let lives = 3;
 let bonus = 0;
+let left;
+let right;
 
 /*здесь создаем функции 
 
@@ -41,21 +48,32 @@ function drawRoad() {
 function drawRoadMarkings(){
     
     ctx.drawImage(lineOne,lineOne.X,lineOne.Y);
-    lineOne.Y += 5;
+    lineOne.Y += 8;
     if (lineOne.Y > 550){
         lineOne.Y = -150;
     }
 
     ctx.drawImage(lineTwo,lineTwo.X,lineTwo.Y);
-    lineTwo.Y += 5;
+    lineTwo.Y += 8;
     if (lineTwo.Y > 550){
         lineTwo.Y = -150;
     }
 }
 
 function drawGamer(){
+    if (left === true && gamer.X > 0){gamer.X-=5}
+    if (right === true && gamer.X < 520){gamer.X+=5}
     ctx.drawImage(gamer,gamer.X,gamer.Y);
 }
+
+function drawEnemyOne(){
+    ctx.drawImage(enemyOne,enemyOne.X,enemyOne.Y);
+    enemyOne.Y += 5;
+    if (enemyOne.Y > 550){
+        enemyOne.Y = -150;
+    }
+}
+
 
 
 function gameOver() {
@@ -66,12 +84,36 @@ function gameOver() {
     ctx.fillText = "GAME OVER";
     }
 }
+
+//здесь обработчики событий вправо-влево
+
+addEventListener ("keydown", function(event){
+    let key = event.keyCode;
+    if (key===37){
+        left = true;
+    }
+    if (key===39){
+        right = true;
+    }
+})
+
+addEventListener ("keyup", function(event){
+    let key = event.keyCode;
+    if (key===37){
+        left = false;
+    }
+    if (key===39){
+        right = false;
+    }
+})
+
 //здесь создание основной функции game, в нее передаем все созданные функции, здесь происходит отрисовка игры
 function game(){
     
     drawRoad();
     drawRoadMarkings();
     drawGamer();
+    drawEnemyOne();
 
 
     GAME = requestAnimationFrame(game);
@@ -79,5 +121,3 @@ function game(){
 
 game();
 gameOver();
-
-//здесь обработчики событий вправо-влево
