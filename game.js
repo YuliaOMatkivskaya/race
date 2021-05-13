@@ -67,23 +67,31 @@ function drawGamer(){
 }
 
 function drawEnemyOne(){
-    ctx.drawImage(enemyOne,enemyOne.X,enemyOne.Y);
-    enemyOne.Y += 5;
-    if (enemyOne.Y > 550){
+    if(enemyOne.Y +150 > gamer.Y && enemyOne.X +80 > gamer.X &&  enemyOne.X < gamer.X+80){
+        //столкновение
+        lives--;
         enemyOne.Y = -150;
         enemyOne.X = Math.floor(Math.random()*520);
+        gameOver();
+    } else {
+    ctx.drawImage(enemyOne,enemyOne.X,enemyOne.Y);
+    enemyOne.Y += 5;
+        if (enemyOne.Y > 550){
+            enemyOne.Y = -150;
+            enemyOne.X = Math.floor(Math.random()*520);
+        }
     }
 }
+
 function drawLives() {
     ctx.font ="20px Arial";
     ctx.fillStyle = "#FFCC00";
     ctx.fillText("Осталось жизней: " + lives, 400, 50);
 }
 
-// function crash(){}
 
 function gameOver() {
-    if (lives === 0){
+    if (lives < 1){
     cancelAnimationFrame(GAME);
     ctx.font ="50px Arial";
     ctx.fillStyle = "#660000";
@@ -122,9 +130,8 @@ function game(){
     drawEnemyOne();
     drawLives();
 
-
     GAME = requestAnimationFrame(game);
+    gameOver();
 }
 
 game();
-gameOver();
