@@ -13,6 +13,9 @@ lineTwo.src = "line.png";
 lineTwo.X = 285;
 lineTwo.Y = 210;
 
+let lives = 3;
+let bonus = 0;
+
 /*здесь создаем функции 
 
 вывод основного поля, 
@@ -26,7 +29,7 @@ lineTwo.Y = 210;
 */
 
 function drawRoad() {
-    ctx.fillStyle = "#333";
+    ctx.fillStyle = "#333333";
     ctx.fillRect(0, 0, 600, 550);
 }
 
@@ -45,6 +48,14 @@ function drawRoadMarkings(){
     }
 }
 
+function gameOver() {
+    if (lives === 0){
+    cancelAnimationFrame(GAME);
+    ctx.font ="50px Arial";
+    ctx.fillStyle = "#660000";
+    ctx.fillText = "GAME OVER";
+    }
+}
 //здесь создание основной функции game, в нее передаем все созданные функции, здесь происходит отрисовка игры
 function game(){
     
@@ -56,5 +67,6 @@ function game(){
 }
 
 game();
+gameOver();
 
 //здесь обработчики событий вправо-влево
