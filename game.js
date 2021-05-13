@@ -108,6 +108,10 @@ function drawBonus(){
     } else {
         ctx.drawImage(bonusOne,bonusOne.X,bonusOne.Y);
         bonusOne.Y += 8;
+        if (bonusOne.Y > 550){
+            bonusOne.Y = -80;
+            bonusOne.X = Math.floor(Math.random()*520);
+        }
     }
 }
 
