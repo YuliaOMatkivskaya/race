@@ -20,12 +20,12 @@ gamer.Y = 390;
 
 let enemyOne = new Image();
 enemyOne.src = "taxi.png";
-enemyOne.X = Math.floor(Math.random()*520);
+enemyOne.X = Math.floor(Math.random() * 520);
 enemyOne.Y = -150;
 
 let bonusOne = new Image();
 bonusOne.src = "bonusOne.png";
-bonusOne.X = Math.floor(Math.random()*520);
+bonusOne.X = Math.floor(Math.random() * 520);
 bonusOne.Y = -80;
 
 let lives = 3;
@@ -50,105 +50,109 @@ function drawRoad() {
     ctx.fillRect(0, 0, 600, 550);
 }
 
-function drawRoadMarkings(){
-    
-    ctx.drawImage(lineOne,lineOne.X,lineOne.Y);
+function drawRoadMarkings() {
+
+    ctx.drawImage(lineOne, lineOne.X, lineOne.Y);
     lineOne.Y += 8;
-    if (lineOne.Y > 550){
+    if (lineOne.Y > 550) {
         lineOne.Y = -150;
     }
 
-    ctx.drawImage(lineTwo,lineTwo.X,lineTwo.Y);
+    ctx.drawImage(lineTwo, lineTwo.X, lineTwo.Y);
     lineTwo.Y += 8;
-    if (lineTwo.Y > 550){
+    if (lineTwo.Y > 550) {
         lineTwo.Y = -150;
     }
 }
 
-function drawGamer(){
-    if (left === true && gamer.X > 0){gamer.X-=5}
-    if (right === true && gamer.X < 520){gamer.X+=5}
-    ctx.drawImage(gamer,gamer.X,gamer.Y);
+function drawGamer() {
+    if (left === true && gamer.X > 0) {
+        gamer.X -= 5;
+    }
+    if (right === true && gamer.X < 520) {
+        gamer.X += 5;
+    }
+    ctx.drawImage(gamer, gamer.X, gamer.Y);
 }
 
-function drawEnemyOne(){
-    if(enemyOne.Y +150 > gamer.Y && enemyOne.X +80 > gamer.X &&  enemyOne.X < gamer.X+80){
+function drawEnemyOne() {
+    if (enemyOne.Y + 150 > gamer.Y && enemyOne.X + 80 > gamer.X && enemyOne.X < gamer.X + 80) {
         //столкновение
         lives--;
         enemyOne.Y = -150;
-        enemyOne.X = Math.floor(Math.random()*520);
+        enemyOne.X = Math.floor(Math.random() * 520);
         gameOver();
     } else {
-    ctx.drawImage(enemyOne,enemyOne.X,enemyOne.Y);
-    enemyOne.Y += 5;
-        if (enemyOne.Y > 550){
+        ctx.drawImage(enemyOne, enemyOne.X, enemyOne.Y);
+        enemyOne.Y += 5;
+        if (enemyOne.Y > 550) {
             enemyOne.Y = -150;
-            enemyOne.X = Math.floor(Math.random()*520);
+            enemyOne.X = Math.floor(Math.random() * 520);
         }
     }
 }
 
 function drawLives() {
-    ctx.font ="20px Arial";
+    ctx.font = "20px Arial";
     ctx.fillStyle = "#FFCC00";
     ctx.fillText("Осталось жизней: " + lives, 30, 30);
 }
 
 function drawTextBonuses() {
-    ctx.font ="20px Arial";
+    ctx.font = "20px Arial";
     ctx.fillStyle = "#FFCC00";
     ctx.fillText("Бонусы: " + bonuses, 470, 30);
 }
 
-function drawBonus(){
-    if(bonusOne.Y +80 > gamer.Y && bonusOne.X +80 > gamer.X &&  bonusOne.X < gamer.X+80){
-        bonuses++
+function drawBonus() {
+    if (bonusOne.Y + 80 > gamer.Y && bonusOne.X + 80 > gamer.X && bonusOne.X < gamer.X + 80) {
+        bonuses++;
         bonusOne.Y = -80;
-        bonusOne.X = Math.floor(Math.random()*520);
+        bonusOne.X = Math.floor(Math.random() * 520);
     } else {
-        ctx.drawImage(bonusOne,bonusOne.X,bonusOne.Y);
+        ctx.drawImage(bonusOne, bonusOne.X, bonusOne.Y);
         bonusOne.Y += 8;
-        if (bonusOne.Y > 550){
+        if (bonusOne.Y > 550) {
             bonusOne.Y = -80;
-            bonusOne.X = Math.floor(Math.random()*520);
+            bonusOne.X = Math.floor(Math.random() * 520);
         }
     }
 }
 
 function gameOver() {
-    if (lives < 1){
-    cancelAnimationFrame(GAME);
-    ctx.font ="50px Arial";
-    ctx.fillStyle = "#660000";
-    ctx.fillText("GAME OVER", 150, 250);
+    if (lives < 1) {
+        ctx.font = "50px Arial";
+        ctx.fillStyle = "#660000";
+        ctx.fillText("GAME OVER", 150, 250);
+        cancelAnimationFrame(GAME);
     }
 }
 
 //здесь обработчик событий вправо-влево : нажатия и отпускания кнопок вправо-влево
 
-addEventListener ("keydown", function(event){
+addEventListener("keydown", function (event) {
     let key = event.keyCode;
-    if (key===37){
+    if (key === 37) {
         left = true;
     }
-    if (key===39){
+    if (key === 39) {
         right = true;
     }
-})
+});
 
-addEventListener ("keyup", function(event){
+addEventListener("keyup", function (event) {
     let key = event.keyCode;
-    if (key===37){
+    if (key === 37) {
         left = false;
     }
-    if (key===39){
+    if (key === 39) {
         right = false;
     }
-})
+});
 
 //здесь создание основной функции game, в нее передаем все созданные функции, здесь происходит отрисовка игры
-function game(){
-    
+function game() {
+
     drawRoad();
     drawRoadMarkings();
     drawBonus();
@@ -157,7 +161,7 @@ function game(){
     drawLives();
     drawTextBonuses();
 
-    GAME = requestAnimationFrame(game);
+    let GAME = requestAnimationFrame(game);
     gameOver();
 }
 
