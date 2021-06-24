@@ -1,7 +1,32 @@
-#ground{
+body {
+    text-align: center;
+}
+
+#ground {
     background-color: #093b09;
 }
+
 #game {
     display: block;
     margin: 0 auto;
+}
+
+.modal-title {
+    font-family: cursive;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: yellow;
+}
+
+.modal-content {
+    font-family: cursive;
+    font-weight: bold;
+    background-color: #79af79;
+}
+
+#startGame {
+    background-color: yellow;
+    color: black;
+    font-family: cursive;
 }

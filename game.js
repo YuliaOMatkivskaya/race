@@ -1,4 +1,17 @@
-const canvas = document.getElementById("game");
+let myModal = new bootstrap.Modal(document.querySelector('#staticBackdrop'));
+myModal.show();
+
+let start;
+let startGame = document.querySelector('#startGame');
+
+function isStart() {
+    start = true;
+    myModal.hide();
+    return start;
+}
+startGame.addEventListener("click", isStart);
+
+const canvas = document.querySelector("#game");
 const ctx = canvas.getContext("2d");
 
 //здесь создаем переменные(разметка, игрок, другие машины, монетки, жизни, очки)
@@ -117,6 +130,9 @@ function drawBonus() {
             bonusOne.X = Math.floor(Math.random() * 520);
         }
     }
+    if (bonuses === 50) {
+        victoria();
+    }
 }
 
 function gameOver() {
@@ -124,28 +140,41 @@ function gameOver() {
         ctx.font = "50px Arial";
         ctx.fillStyle = "#660000";
         ctx.fillText("GAME OVER", 150, 250);
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
         cancelAnimationFrame(GAME);
     }
+}
+
+function victoria() {
+    ctx.font = "60px Arial";
+    ctx.fillStyle = "#660000";
+    ctx.fillText("Обед!", 230, 250);
+    setTimeout(() => {
+        window.location.reload();
+    }, 3000);
+    cancelAnimationFrame(GAME);
 }
 
 //здесь обработчик событий вправо-влево : нажатия и отпускания кнопок вправо-влево
 
 addEventListener("keydown", function (event) {
-    let key = event.keyCode;
-    if (key === 37) {
+    let key = event.key;
+    if (key === "ArrowLeft") {
         left = true;
     }
-    if (key === 39) {
+    if (key === "ArrowRight") {
         right = true;
     }
 });
 
 addEventListener("keyup", function (event) {
-    let key = event.keyCode;
-    if (key === 37) {
+    let key = event.key;
+    if (key === "ArrowLeft") {
         left = false;
     }
-    if (key === 39) {
+    if (key === "ArrowRight") {
         right = false;
     }
 });
@@ -155,11 +184,13 @@ function game() {
 
     drawRoad();
     drawRoadMarkings();
-    drawBonus();
-    drawGamer();
-    drawEnemyOne();
-    drawLives();
-    drawTextBonuses();
+    if (start) {
+        drawBonus();
+        drawGamer();
+        drawEnemyOne();
+        drawLives();
+        drawTextBonuses();
+    }
 
     let GAME = requestAnimationFrame(game);
     gameOver();
