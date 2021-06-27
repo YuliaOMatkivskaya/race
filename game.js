@@ -1,4 +1,5 @@
 let myModal = new bootstrap.Modal(document.querySelector('#staticBackdrop'));
+
 myModal.show();
 
 let start;
