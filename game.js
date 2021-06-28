@@ -17,27 +17,27 @@ const ctx = canvas.getContext("2d");
 //здесь создаем переменные(разметка, игрок, другие машины, монетки, жизни, очки)
 
 let lineOne = new Image();
-lineOne.src = "line.png";
+lineOne.src = "img/line.png";
 lineOne.X = 295;
 lineOne.Y = -150;
 
 let lineTwo = new Image();
-lineTwo.src = "line.png";
+lineTwo.src = "img/line.png";
 lineTwo.X = 295;
 lineTwo.Y = 210;
 
 let gamer = new Image();
-gamer.src = "taxi.png";
+gamer.src = "img/taxi.png";
 gamer.X = 200;
 gamer.Y = 390;
 
 let enemyOne = new Image();
-enemyOne.src = "taxi.png";
+enemyOne.src = "img/taxi.png";
 enemyOne.X = Math.floor(Math.random() * 520);
 enemyOne.Y = -150;
 
 let bonusOne = new Image();
-bonusOne.src = "bonusOne.png";
+bonusOne.src = "img/bonusOne.png";
 bonusOne.X = Math.floor(Math.random() * 520);
 bonusOne.Y = -80;
 
