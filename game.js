@@ -1,4 +1,5 @@
 let myModal = new bootstrap.Modal(document.querySelector('#staticBackdrop'));
+
 myModal.show();
 
 let start;
@@ -9,6 +10,7 @@ function isStart() {
     myModal.hide();
     return start;
 }
+
 startGame.addEventListener("click", isStart);
 
 const canvas = document.querySelector("#game");
