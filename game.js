@@ -44,6 +44,7 @@ bonusOne.X = Math.floor(Math.random() * 520);
 bonusOne.Y = -80;
 
 let lives = 3;
+console.log(lives)
 let bonuses = 0;
 let left;
 let right;
